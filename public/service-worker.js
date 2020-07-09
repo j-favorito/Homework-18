@@ -3,6 +3,7 @@ const FILES_TO_CACHE = [
     "/index.html",
     "/assets/css/styles.css",
     "/dist/bundle.js",
+    "/assets/js/db.js",
     "/assets/images/icons/icon-192x192.png",
     "/assets/images/icons/icon-512x512.png"
   ];
@@ -52,21 +53,6 @@ const FILES_TO_CACHE = [
       return;
     }
   
-    // handle runtime GET requests for data from /api routes
-    if (event.request.url.includes("/api/images")) {
-      // make network request and fallback to cache if network request fails (offline)
-      event.respondWith(
-        caches.open(RUNTIME_CACHE).then(cache => {
-          return fetch(event.request)
-            .then(response => {
-              cache.put(event.request, response.clone());
-              return response;
-            })
-            .catch(() => caches.match(event.request));
-        })
-      );
-      return;
-    }
   
     // use cache first for all other requests for performance
     event.respondWith(

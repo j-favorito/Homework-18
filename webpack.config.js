@@ -1,7 +1,7 @@
 const path = require("path");
 
 const config = {
-  entry: "./public/assets/src/entry.js",
+  entry: "./public/assets/js/index.js",
   output: {
     path: __dirname + "/public/dist",
     filename: "bundle.js"
